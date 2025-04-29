@@ -1,4 +1,13 @@
-package Books;
+WEEK-7
+
+add this part in doGet in java program
+
+PrintWriter pw = response.getWriter(); // ✅ Fixed case
+        pw.println("Hello world! Welcome to this page");
+
+
+<-----------------------------WEEK8----------------------------->
+package BookServlet;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -51,3 +60,23 @@ public class BookServlet extends HttpServlet {
         }
     }
 }
+
+
+
+###SQl
+
+CREATE DATABASE bookstore;
+
+USE bookstore;
+
+CREATE TABLE books (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    author VARCHAR(255) NOT NULL,
+    price DECIMAL(10,2) NOT NULL
+);
+
+INSERT INTO books (title, author, price) VALUES 
+('Introduction to Java', 'James Gosling', 499.99),
+('Learning Python', 'Mark Lutz', 699.00),
+('Web Development Basics', 'Tim Berners-Lee', 299.50);
