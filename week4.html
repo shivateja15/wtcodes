@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Online Book Store - Shopping Cart</title>
+ <style>
+ body { font-family: Arial; padding: 20px; }
+ .book { margin-bottom: 15px; }
+ button { margin-left: 10px; }
+ #cartContainer { margin-top: 30px; border-top: 1px solid #ccc; padding-top: 20px; }
+ </style>
+</head>
+<body>
+ <h2>Book List</h2>
+ <div class="book">
+ <strong>Harry Potter</strong> - ₹499
+ <button onclick="addToCart('Harry Potter', 499)">Add to Cart</button>
+ </div>
+ <div class="book">
+ <strong>The Alchemist</strong> - ₹299
+ <button onclick="addToCart('The Alchemist', 299)">Add to Cart</button>
+ </div>
+ <div class="book">
+ <strong>Atomic Habits</strong> - ₹399
+ <button onclick="addToCart('Atomic Habits', 399)">Add to Cart</button>
+ </div>
+ <button onclick="viewCart()">� View Cart</button>
+ <div id="cartContainer"></div>
+ <script>
+ const cart = {};
+ function addToCart(bookName, price) {
+ if (cart[bookName]) {
+ cart[bookName].quantity++;
+ } else {
+ cart[bookName] = { price: price, quantity: 1 };
+ }
+ alert(`${bookName} added to cart.`);
+ } 
+function viewCart() {
+ const container = document.getElementById("cartContainer");
+ container.innerHTML = "<h3>Your Cart:</h3>";
+ if (Object.keys(cart).length === 0) {
+ container.innerHTML += "<p>Cart is empty.</p>";
+ return;
+ }
+ let total = 0;
+ const list = document.createElement("ul");
+ for (const book in cart) {
+ const item = cart[book];
+ total += item.price * item.quantity;
+ const li = document.createElement("li");
+ li.textContent = `${book} - ₹${item.price} × ${item.quantity} = ₹${item.price *
+item.quantity}`;
+ list.appendChild(li);
+ }
+ container.appendChild(list);
+ container.innerHTML += `<strong>Total: ₹${total}</strong>`;
+ }
+ </script>
+</body>
+</html> 

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog>
+  <book id="bk101">
+    <title>To Kill a Mockingbird</title>
+    <author>Harper Lee</author>
+    <genre>Fiction</genre>
+    <price currency="USD">10.99</price>
+    <availability>In Stock</availability>
+  </book>
+
+  <book id="bk102">
+    <title>1984</title>
+    <author>George Orwell</author>
+    <genre>Dystopian</genre>
+    <price currency="USD">8.99</price>
+    <availability>Out of Stock</availability>
+  </book>
+
+  <book id="bk103">
+    <title>Sapiens: A Brief History of Humankind</title>
+    <author>Yuval Noah Harari</author>
+    <genre>Non-fiction</genre>
+    <price currency="USD">14.50</price>
+    <availability>In Stock</availability>
+  </book>
+</catalog>
+
+
+
+<--------------OPTIONAL-------------------------------->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Book Catalog Viewer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Book Catalog</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Genre</th>
+        <th>Price (USD)</th>
+        <th>Availability</th>
+      </tr>
+    </thead>
+    <tbody id="bookTableBody"></tbody>
+  </table>
+
+  <script>
+    fetch("catalog.xml")
+      .then(response => response.text())
+      .then(xmlString => {
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(xmlString, "text/xml");
+
+        const books = xmlDoc.getElementsByTagName("book");
+        const tbody = document.getElementById("bookTableBody");
+
+        for (let i = 0; i < books.length; i++) {
+          const book = books[i];
+          const id = book.getAttribute("id");
+          const title = book.getElementsByTagName("title")[0].textContent;
+          const author = book.getElementsByTagName("author")[0].textContent;
+          const genre = book.getElementsByTagName("genre")[0].textContent;
+          const price = book.getElementsByTagName("price")[0].textContent;
+          const availability = book.getElementsByTagName("availability")[0].textContent;
+
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${id}</td>
+            <td>${title}</td>
+            <td>${author}</td>
+            <td>${genre}</td>
+            <td>${price}</td>
+            <td>${availability}</td>
+          `;
+          tbody.appendChild(row);
+        }
+      });
+  </script>
+
+</body>
+</html>

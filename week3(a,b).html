@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+ <html>
+ <head>
+  <title>User Registration</title>
+  <script>
+    function validateForm() {
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirmPassword").value;
+      if (username.length < 5) {
+        alert("Username must be at least 5 characters.");
+        return false;
+      }
+      if (password.length < 8) {
+        alert("Password must be at least 8 characters.");
+        return false;
+      }
+      if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return false;
+      }
+      alert("Registration Successful!");
+      return true;
+    }
+  </script>
+ </head>
+ <body>
+  <h2>User Registration</h2>
+  <form>
+    <label>Username:</label><br>
+    <input type="text" id="username"><br><br>
+    <label>Password:</label><br>
+    <input type="password" id="password"><br><br>
+    <label>Confirm Password:</label><br>
+    <input type="password" id="confirmPassword"><br><br>
+    <button type=“submit" onclick=“ validateForm()”>Register</button>
+  </form>
+ </body>
+ </html>
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html> 
+<html> 
+<head> 
+  <title>Forgot Password</title> 
+  <script> 
+    const fakeAccounts = ["user@example.com", "booklover@gmail.com"]; // Demo 
+database 
+    function validateEmail() { 
+      const email = document.getElementById("email").value; 
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
+      if (!emailPattern.test(email)) { 
+        alert("Please enter a valid email address."); 
+        return false; 
+      } 
+      if (!fakeAccounts.includes(email)) { 
+        alert("This email is not associated with any account."); 
+        return false; 
+      } 
+      alert("Password reset link sent to your email."); 
+      return true; 
+    } 
+  </script> 
+</head> 
+<body> 
+  <h2>Forgot Password</h2> 
+  <form onsubmit="return validateEmail()"> 
+    <label>Email Address:</label><br> 
+    <input type="text" id="email"><br><br> 
+    <button type="submit">Reset Password</button> 
+  </form> 
+</body> 
+</html>
+
+

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<users>
+ <user id="u001">
+ <username>shivasai123</username>
+ <password encryption="SHA-256">5e884898da28047151d0e56f8dc629...</password>
+ <email>shivasai@example.com</email>
+ <purchaseHistory>
+ <purchase>
+ <bookID>bk101</bookID>
+ <title>To Kill a Mockingbird</title>
+ <date>2025-03-21</date>
+ <price currency="USD">10.99</price>
+ </purchase>
+ <purchase>
+ <bookID>bk103</bookID>
+ <title>Sapiens: A Brief History of Humankind</title>
+ <date>2025-04-10</date>
+ <price currency="USD">14.50</price>
+ </purchase>
+ </purchaseHistory>
+ </user>
+ <user id="u002">
+ <username>anuj456</username>
+ <password encryption="SHA-256">e99a18c428cb38d5f260853678922e...</password>
+ <email>anuj@example.com</email>
+ <purchaseHistory>
+ <purchase>
+ <bookID>bk102</bookID>
+ <title>1984</title>
+ <date>2025-04-01</date>
+ <price currency="USD">8.99</price>
+ </purchase>
+ </purchaseHistory>
+ </user>
+</users>

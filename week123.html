@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Online Book Store</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    .main {
+      display: flex;
+      height: 90vh;
+    }
+    .nav {
+      width: 20%;
+      background-color: #f0f0f0;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    .content {
+      width: 80%;
+      border-left: 1px solid #ccc;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    .footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #333;
+      color: white;
+      height: 10vh;
+      box-sizing: border-box;
+    }
+    a {
+      display: block;
+      margin-bottom: 10px;
+      text-decoration: none;
+      color: black;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="main">
+  <!-- Navigation -->
+  <div class="nav">
+    <h3>Categories</h3>
+    <a href="#" onclick="loadContent('Fiction Books', 'Explore the world of imagination.')">Fiction</a>
+    <a href="#" onclick="loadContent('Non-fiction Books', 'Expand your knowledge base.')">Non-Fiction</a>
+    <a href="#" onclick="loadContent('Comics', 'Read fun and illustrated stories.')">Comics</a>
+    <a href="#" onclick="loadContent('Kids Books', 'Special selection for young readers.')">Kids</a>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+    <iframe id="contentFrame" srcdoc="
+      <h2>Welcome to the Online Book Store</h2>
+      <p>Select a category from the left to view books.</p>
+    "></iframe>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  &copy; 2025 Online Book Store | Contact us: support@bookstore.com
+</div>
+
+<script>
+  function loadContent(title, message) {
+    document.getElementById('contentFrame').srcdoc = `
+      <h2>${title}</h2>
+      <p>${message}</p>
+    `;
+  }
+</script>
+
+</body>
+</html>
