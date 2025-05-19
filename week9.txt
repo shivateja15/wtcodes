@@ -31,7 +31,7 @@ in src/main/webapp/
 
 home.jsp
 
-<%@ page language="java" import="jakarta.servlet.http.,jakarta.servlet." %>
+<%@ page language="java" import="jakarta.servlet.http.*,jakarta.servlet.*" %>
 <%
   if (session == null || session.getAttribute("user") == null) {
     response.sendRedirect("login.jsp");
@@ -69,7 +69,7 @@ login.jsp
 
 logout.jsp
 
-<%@ page language="java" import="jakarta.servlet.http.,jakarta.servlet." %>
+<%@ page language="java" import="jakarta.servlet.http.*,jakarta.servlet.*" %>
 <%
   if (session != null) {
     session.invalidate();
