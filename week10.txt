@@ -1,0 +1,206 @@
+
+STEP 1: Create a Maven Project
+Open Eclipse.
+Go to File → New → Maven Project.
+Choose Simple Project → Click Next.
+Fill in:
+Group Id: com.example
+Artifact Id: hibernate-demo
+Finish.
+
+
+
+In MySQL
+
+create database hibernate_demo;
+use hibernate_demo
+
+
+pom.xml
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.example</groupId>
+  <artifactId>Week10Hibernate</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  
+  <dependencies>
+    <!-- Hibernate Core -->
+    <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-core</artifactId>
+        <version>5.6.15.Final</version>
+    </dependency>
+
+
+
+
+    <!-- MySQL JDBC Driver -->
+    <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>8.0.33</version>
+    </dependency>
+
+    <!-- JPA (javax) -->
+    <dependency>
+        <groupId>javax.persistence</groupId>
+        <artifactId>javax.persistence-api</artifactId>
+        <version>2.2</version>
+    </dependency>
+  </dependencies>
+
+</project>
+
+Inside src/main/java
+
+create package named
+com.package.hibernate
+
+Book.java
+
+package com.example.hibernate;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "books")
+public class Book {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    private String title;
+    private String author;
+    private double price;  
+
+    public Book() {}
+
+    public Book(String title, String author, double price) {
+        this.title = title;
+        this.author = author;
+        this.price = price;
+    }
+
+    // Getters and setters
+    public int getId() { return id; }
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
+    public String getAuthor() { return author; }
+    public void setAuthor(String author) { this.author = author; }
+    public double getPrice() { return price; }
+    public void setPrice(double price) { this.price = price; }
+}
+
+User.java
+
+package com.example.hibernate;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "users")
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    private String username;
+    private String email;
+
+    public User() {}
+
+    public User(String username, String email) {
+        this.username = username;
+        this.email = email;
+    }
+
+    public int getId() { return id; }
+    public String getName() { return username; }
+    public void setName(String name) { this.username = username; }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+}
+
+Main.java
+
+package com.example.hibernate;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+public class Main {
+
+    private static final SessionFactory sessionFactory;
+
+    static {
+        try {
+            sessionFactory = new Configuration()
+                    .configure()
+                    .addAnnotatedClass(Book.class)
+                    .addAnnotatedClass(User.class)
+                    .buildSessionFactory();
+        } catch (Throwable ex) {
+            throw new ExceptionInInitializerError(ex);
+        }
+    }
+
+    public static void main(String[] args) {
+        Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+
+        Book book = new Book("Java Basics", "John Doe", 599.0);
+        User user = new User("Hansini", "hansini@example.com");
+
+        session.save(book);
+        session.save(user);
+
+        tx.commit();
+        session.close();
+
+        System.out.println("Inserted!");
+    }
+}
+
+inside src/main/resources
+
+Hibernate.cfg.xml
+
+<?xml version='1.0' encoding='utf-8'?>
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hibernate_demo</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">root@123</property>
+
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.show_sql">true</property>
+    </session-factory>
+</hibernate-configuration>
+
+
+
+
+
+
+To verify,
+
+finally run  these in MySQL
+
+use hibernate_db;
+
+show tables;
+
+select * from books;
+
+select * from users;
+
+
