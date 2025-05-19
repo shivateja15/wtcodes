@@ -78,7 +78,7 @@ logout.jsp
 %>
 
 
-append this in 
+append this in web.xml
 
 <servlet>
   <servlet-name>LoginServlet</servlet-name>
